@@ -24,14 +24,12 @@ private:
 
 	void DrawProfileResult(const Core::TreeNode* node);
 
-	bool EventWindowResize(Events::WindowResizeEvent& event);
-
-	static void ScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
+	bool EventScroll(Events::WindowScrollEvent& event);
 
 	long long m_startTime;
-	static long long m_endTime;
+	long long m_endTime;
 
-	static uint32_t m_constEndTime;
+	uint32_t m_constEndTime;
 
 	Core::Tree m_tree;
 };

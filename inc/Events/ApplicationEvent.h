@@ -40,4 +40,23 @@ namespace Events
 	private:
 		unsigned int m_width, m_height;
 	};
+
+	class WindowScrollEvent : public Event
+	{
+	public:
+		WindowScrollEvent(double a_xOffset, double a_yOffset)
+			: m_xOffset(a_xOffset), m_yOffset(a_yOffset)
+		{}
+
+		EVENT_CLASS_TYPE(MouseScrolled)
+			EVENT_CLASS_CATEGORY(EventCategoryMouse)
+
+			std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "Window Scroll Event: " << m_xOffset << ", " << m_yOffset << "\n";
+			return ss.str();
+		}
+		double m_xOffset, m_yOffset;
+	};
 }

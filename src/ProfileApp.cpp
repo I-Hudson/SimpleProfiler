@@ -10,9 +10,6 @@
 #define NEXT_WINDOW(x, y, xSize, ySize) ImGui::SetNextWindowPos(ImVec2(x, y)); 	ImGui::SetNextWindowSize(ImVec2(xSize, ySize));
 #define LOG_LINE(x) std::cout << x << "\n";
 
-long long ProfileApp::m_endTime = 0;
-uint32_t ProfileApp::m_constEndTime = 0;
-
 float WINDOW_X_SIZE = 1920;
 float WINDOW_Y_SIZE = 1080;
 
@@ -37,6 +34,8 @@ void ProfileApp::OnCreate()
 	GLFWwindow* window = (GLFWwindow*)ImGui::GetIO().ClipboardUserData;
 	glfwSetScrollCallback(window, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
+			Events::WindowScrollEvent event(xOffset, yOffset);
+			FireEvent(event);
 		});
 
 	glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height)
@@ -46,7 +45,7 @@ void ProfileApp::OnCreate()
 		});
 
 	Profile::ProfilerDataProcessor data;
-	data.Load("2k.json");
+	data.Load("mill.json");
 
 	if (data.DataReady())
 	{
@@ -166,7 +165,7 @@ void ProfileApp::OnEvent(Events::Event& event)
 {
 	Events::EventDispatcher dispatcher(event);
 
-	dispatcher.Dispatch<Events::WindowResizeEvent>(BIND_EVENT_FUNC(ProfileApp::EventWindowResize));
+	dispatcher.Dispatch<Events::WindowScrollEvent>(BIND_EVENT_FUNC(ProfileApp::EventScroll));
 }
 
 bool ProfileApp::Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size)
@@ -230,14 +229,9 @@ void ProfileApp::DrawProfileResult(const  Core::TreeNode* node)
 	drawCall++;
 }
 
-bool ProfileApp::EventWindowResize(Events::WindowResizeEvent& event)
+bool ProfileApp::EventScroll(Events::WindowScrollEvent& event)
 {
-	return false;
-}
-
-void ProfileApp::ScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
-{
-	m_endTime += yOffset * 250;
+	m_endTime += event.m_yOffset * 250;
 
 	if (m_endTime < 1)
 	{
@@ -251,5 +245,5 @@ void ProfileApp::ScrollCallback(GLFWwindow* window, double xOffset, double yOffs
 
 	contentWidth = ((double)m_constEndTime / (double)m_endTime) * WINDOW_X_SIZE;
 
-	std::cout << m_endTime << "\n";
+	return false;
 }
