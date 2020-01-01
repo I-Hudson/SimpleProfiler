@@ -55,14 +55,14 @@ namespace Core
 		{
 			m_timelineEnd += event.m_yOffset * 250;
 
-			if (m_timelineEnd < 1)
-			{
-				m_timelineEnd = 0;
-			}
-			else if (m_timelineEnd > m_timelineAbsEnd)
-			{
-				m_timelineEnd = m_timelineAbsEnd;
-			}
+			//if (m_timelineEnd < 1)
+			//{
+			//	m_timelineEnd = 0;
+			//}
+			//else if (m_timelineEnd > m_timelineAbsEnd)
+			//{
+			//	m_timelineEnd = m_timelineAbsEnd;
+			//}
 
 			m_contentWidth = (m_timelineAbsEnd / m_timelineEnd) * m_size.x;
 
