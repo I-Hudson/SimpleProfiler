@@ -33,3 +33,4 @@
 # Folders to ignore
 .vs/
 bin/
+debug/
