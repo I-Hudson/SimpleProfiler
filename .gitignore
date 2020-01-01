@@ -33,5 +33,9 @@
 # Folders to ignore
 .vs/
 bin/
+<<<<<<< HEAD
 Debug/
 x64/
+=======
+debug/
+>>>>>>> 09066548ba4b44c89ab63504c442592ae0b02e72
