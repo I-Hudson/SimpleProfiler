@@ -23,6 +23,7 @@
     <ProjectGuid>{BCB25B57-4476-497B-BC8C-B316A0378DE9}</ProjectGuid>
     <RootNamespace>CProfiler</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SimpleProfiler</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -95,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)inc;$(SolutionDir)deps/json;$(SolutionDir)deps/imgui;$(SolutionDir)deps/imgui/impl;$(SolutionDir)deps/imgui/include;$(SolutionDir)deps/glad/include;$(SolutionDir)deps/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\Users\Documents\SourceControl\Github\C++ Porjects\SimpleProfiler\deps\json;$(SolutionDir)inc;$(SolutionDir)\deps\json;$(SolutionDir)deps/imgui;$(SolutionDir)deps/imgui/impl;$(SolutionDir)deps/imgui/include;$(SolutionDir)deps/glad/include;$(SolutionDir)deps/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;IMGUI_IMPL_OPENGL_LOADER_GLAD;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -127,6 +128,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;IMGUI_IMPL_OPENGL_LOADER_GLAD;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

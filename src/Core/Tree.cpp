@@ -95,7 +95,7 @@ namespace Core
 	{
 		std::string s;
 
-		for (size_t i = 0; i < index; i++)
+		for (int i = 0; i < index; i++)
 		{
 			s.append("-");
 		}
@@ -107,7 +107,7 @@ namespace Core
 	{
 		if (node == nullptr)
 		{
-			for (size_t i = 0; i < m_rootNodes.size(); ++i)
+			for (int i = 0; i < m_rootNodes.size(); ++i)
 			{
 				PrintTreeToConsole(m_rootNodes[i]);
 				indent = 0;

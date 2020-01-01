@@ -115,7 +115,7 @@ void ProfileApp::OnUpdate()
 	const int rowHeight = 25;
 
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
-	for (size_t i = 0; i < maxNumberOfButtons; i++)
+	for (int i = 0; i < maxNumberOfButtons; i++)
 	{
 		DrawProfileResult(m_tree.m_rootNodes[i]);
 	}

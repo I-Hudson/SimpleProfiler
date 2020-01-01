@@ -20,12 +20,12 @@ namespace Core
 
 		uint32_t GetMircoStart()
 		{
-			return ProfileResult.Start;
+			return (uint32_t)ProfileResult.Start;
 		}
 
 		uint32_t GetMircoEnd()
 		{
-			return ProfileResult.End;
+			return (uint32_t)ProfileResult.End;
 		}
 
 		uint32_t GetMilliStart()

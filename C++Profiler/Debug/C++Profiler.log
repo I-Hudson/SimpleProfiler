@@ -1,7 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(438,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-Application.obj : error LNK2019: unresolved external symbol _glfwInit referenced in function "private: void __thiscall Core::Application::OnCreateInternal(void)" (?OnCreateInternal@Application@Core@@AAEXXZ)
-Application.obj : error LNK2019: unresolved external symbol _glfwWindowHint referenced in function "private: void __thiscall Core::Application::OnCreateInternal(void)" (?OnCreateInternal@Application@Core@@AAEXXZ)
-Application.obj : error LNK2019: unresolved external symbol _glfwCreateWindow referenced in function "private: void __thiscall Core::Application::OnCreateInternal(void)" (?OnCreateInternal@Application@Core@@AAEXXZ)
-Application.obj : error LNK2019: unresolved external symbol _glfwMakeContextCurrent referenced in function "private: void __thiscall Core::Application::OnCreateInternal(void)" (?OnCreateInternal@Application@Core@@AAEXXZ)
-F:\Users\Documents\SourceControl\Github\C++ Porjects\C++Profiler\deps\glfw\lib-vc2019\glfw3.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
-F:\Users\Documents\SourceControl\Github\C++ Porjects\C++Profiler\bin\Debug\Win32\C++Profiler.exe : fatal error LNK1120: 4 unresolved externals
