@@ -30,4 +30,6 @@
 *.out
 *.app
 
+# Folders to ignore
 .vs/
+bin/
