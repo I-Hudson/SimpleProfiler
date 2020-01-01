@@ -163,6 +163,8 @@
     <ClInclude Include="..\inc\Core\Application.h" />
     <ClInclude Include="..\inc\Core\ErrorCodes.h" />
     <ClInclude Include="..\inc\Core\Tree.h" />
+    <ClInclude Include="..\inc\Events\ApplicationEvent.h" />
+    <ClInclude Include="..\inc\Events\Event.h" />
     <ClInclude Include="..\inc\ProfileApp.h" />
     <ClInclude Include="..\inc\Profile\Instrumentor.h" />
     <ClInclude Include="..\inc\Profile\ProfilerDataProcessor.h" />

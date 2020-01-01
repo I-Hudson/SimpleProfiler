@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Profiler">
       <UniqueIdentifier>{3473d27f-a8de-4035-a449-bb8d5e4bff70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{36e6ce63-4205-4180-a138-e99b82a1a290}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -112,6 +115,12 @@
     </ClInclude>
     <ClInclude Include="..\inc\Core\Tree.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Events\Event.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Events\ApplicationEvent.h">
+      <Filter>Header Files\Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

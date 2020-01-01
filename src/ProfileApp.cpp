@@ -18,6 +18,8 @@ float WINDOW_Y_SIZE = 1080;
 
 float contentWidth = WINDOW_X_SIZE;
 
+#define BIND_EVENT_FUNC(x) (std::bind(&x, this, std::placeholders::_1))
+
 ProfileApp::ProfileApp()
 {
 	PROFILE_FUNCTION();
@@ -33,7 +35,15 @@ void ProfileApp::OnCreate()
 {
 	PROFILE_FUNCTION();
 	GLFWwindow* window = (GLFWwindow*)ImGui::GetIO().ClipboardUserData;
-	glfwSetScrollCallback(window, ProfileApp::ScrollCallback);
+	glfwSetScrollCallback(window, [](GLFWwindow* window, double xOffset, double yOffset)
+		{
+		});
+
+	glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height)
+		{
+			Events::WindowResizeEvent event(width, height);
+			FireEvent(event);
+		});
 
 	Profile::ProfilerDataProcessor data;
 	data.Load("2k.json");
@@ -152,6 +162,13 @@ void ProfileApp::OnDestroy()
 	m_tree.Destroy();
 }
 
+void ProfileApp::OnEvent(Events::Event& event)
+{
+	Events::EventDispatcher dispatcher(event);
+
+	dispatcher.Dispatch<Events::WindowResizeEvent>(BIND_EVENT_FUNC(ProfileApp::EventWindowResize));
+}
+
 bool ProfileApp::Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size)
 {
 	PROFILE_FUNCTION();
@@ -211,6 +228,11 @@ void ProfileApp::DrawProfileResult(const  Core::TreeNode* node)
 		std::cout << ss.str() << "\n";
 	}
 	drawCall++;
+}
+
+bool ProfileApp::EventWindowResize(Events::WindowResizeEvent& event)
+{
+	return false;
 }
 
 void ProfileApp::ScrollCallback(GLFWwindow* window, double xOffset, double yOffset)

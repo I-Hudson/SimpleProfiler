@@ -17,10 +17,14 @@ protected:
 	virtual void OnDraw() override;
 	virtual void OnDestroy() override;
 
+	virtual void OnEvent(Events::Event& event) override;
+
 private:
 	bool Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size = -1.0f);
 
 	void DrawProfileResult(const Core::TreeNode* node);
+
+	bool EventWindowResize(Events::WindowResizeEvent& event);
 
 	static void ScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 

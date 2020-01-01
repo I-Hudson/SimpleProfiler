@@ -2,6 +2,9 @@
 
 namespace Core
 {
+#define BIND_EVENT_FUNC(x) (std::bind(&Application::x, this, std::placeholders::_1))
+	EventCallbackFn Application::EventCallback = nullptr;
+
 	Application::Application()
 	{
 		PROFILE_FUNCTION();
@@ -78,6 +81,8 @@ namespace Core
 			//error code
 		}
 
+		SetEventCallback(BIND_EVENT_FUNC(OnEventInternal));
+
 		ImGUICreate();
 	}
 
@@ -109,6 +114,11 @@ namespace Core
 
 		glfwDestroyWindow(m_window);
 		glfwTerminate();
+	}
+
+	void Application::OnEventInternal(Events::Event& event)
+	{
+		OnEvent(event);
 	}
 
 	void Application::ImGUICreate()
