@@ -33,3 +33,5 @@
 # Folders to ignore
 .vs/
 bin/
+Debug/
+x64/
