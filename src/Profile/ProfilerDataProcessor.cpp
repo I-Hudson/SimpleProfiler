@@ -49,7 +49,7 @@ namespace Profile
 
 		int startIndex = 0;
 
-		for (size_t i = 0; i < a_stringToSplit.length(); ++i)
+		for (int i = 0; i < a_stringToSplit.length(); ++i)
 		{
 			if (a_stringToSplit[i] == a_splitCharacter)
 			{

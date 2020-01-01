@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Events">
       <UniqueIdentifier>{36e6ce63-4205-4180-a138-e99b82a1a290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\UI">
+      <UniqueIdentifier>{cac4f953-0998-47f6-9ab2-772a0c4aba0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\UI">
+      <UniqueIdentifier>{91356eb4-4113-443a-a60d-c1bea4ce0d00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -71,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="..\src\Core\Tree.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\UI\UIPanel.cpp">
+      <Filter>Source Files\Core\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Core\UI\UITimeline.cpp">
+      <Filter>Source Files\Core\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="..\inc\Events\ApplicationEvent.h">
       <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Core\UI\UITimeline.h">
+      <Filter>Header Files\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Core\UI\UIPanel.h">
+      <Filter>Header Files\Core\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

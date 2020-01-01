@@ -146,6 +146,8 @@
     <ClCompile Include="..\deps\imgui\source\imgui_widgets.cpp" />
     <ClCompile Include="..\src\Core\Application.cpp" />
     <ClCompile Include="..\src\Core\Tree.cpp" />
+    <ClCompile Include="..\src\Core\UI\UIPanel.cpp" />
+    <ClCompile Include="..\src\Core\UI\UITimeline.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\ProfileApp.cpp" />
     <ClCompile Include="..\src\Profile\Instrumentor.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="..\inc\Core\Application.h" />
     <ClInclude Include="..\inc\Core\ErrorCodes.h" />
     <ClInclude Include="..\inc\Core\Tree.h" />
+    <ClInclude Include="..\inc\Core\UI\UIPanel.h" />
+    <ClInclude Include="..\inc\Core\UI\UITimeline.h" />
     <ClInclude Include="..\inc\Events\ApplicationEvent.h" />
     <ClInclude Include="..\inc\Events\Event.h" />
     <ClInclude Include="..\inc\ProfileApp.h" />

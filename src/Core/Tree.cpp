@@ -31,7 +31,7 @@ namespace Core
 			return;
 		}
 
-		constResultNumber = profileObject.traceEvents.size();
+		constResultNumber = (unsigned int)profileObject.traceEvents.size();
 
 		TreeNode* baseNode = new TreeNode();
 		baseNode->Parent = nullptr;
@@ -56,7 +56,7 @@ namespace Core
 				TreeNode* newRootNode = new TreeNode();
 				newRootNode->Parent = nullptr;
 				newRootNode->ProfileResult = profileObject.traceEvents[i];
-				newRootNode->x = m_rootNodes.size();
+				newRootNode->x = (int)m_rootNodes.size();
 				newRootNode->y = 0;
 				m_rootNodes.push_back(newRootNode);
 
@@ -164,7 +164,7 @@ namespace Core
 			tNode->Parent = node;
 			tNode->ProfileResult = profileResult;
 			tNode->y = node->y + 1;
-			tNode->x = node->Children.size();
+			tNode->x = (int)node->Children.size();
 			node->AddChild(tNode);
 
 			//TreeNode tNode;

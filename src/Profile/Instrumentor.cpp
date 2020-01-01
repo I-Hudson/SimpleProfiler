@@ -117,7 +117,7 @@ namespace Profile
 		}
 
 		m_results.push_back(result);
-		m_profileCount = m_results.size();
+		m_profileCount = (int)m_results.size();
 
 		m_results[m_profileCount - 1].Start -= m_profileStartTime;
 		m_results[m_profileCount - 1].End -= m_profileStartTime;
@@ -186,7 +186,7 @@ namespace Profile
 		long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
 		long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
-		uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+		uint32_t threadID = (uint32_t)std::hash<std::thread::id>{}(std::this_thread::get_id());
 		Instrumentor::Get()->AddProfileResult({ m_id, m_Name, start, end, threadID });//WriteProfile({ m_Name, start, end, threadID });
 		
 		if (m_print)

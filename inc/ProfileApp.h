@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/Application.h"
 #include "Core/Tree.h"
+#include "Core/UI/UITimeline.h"
 
 #include "imgui_internal.h"
 
@@ -25,6 +26,8 @@ private:
 	void DrawProfileResult(const Core::TreeNode* node);
 
 	bool EventScroll(Events::WindowScrollEvent& event);
+
+	Core::UI::UITimeline m_timeline;
 
 	long long m_startTime;
 	long long m_endTime;

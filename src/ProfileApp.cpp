@@ -15,7 +15,7 @@ float WINDOW_Y_SIZE = 1080;
 
 float contentWidth = WINDOW_X_SIZE;
 
-#define BIND_EVENT_FUNC(x) (std::bind(&x, this, std::placeholders::_1))
+#define BIND_EVENT_FUNC(func, object) (std::bind(&func, object, std::placeholders::_1))
 
 ProfileApp::ProfileApp()
 {
@@ -44,6 +44,8 @@ void ProfileApp::OnCreate()
 			FireEvent(event);
 		});
 
+	m_timeline = Core::UI::UITimeline(nullptr, "Timeline", 0, 50, WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.35f);
+
 	Profile::ProfilerDataProcessor data;
 	data.Load("mill.json");
 
@@ -54,6 +56,8 @@ void ProfileApp::OnCreate()
 
 		if (m_tree.IsReady())
 		{
+			m_timeline.SetTree(&m_tree);
+
 			m_startTime = 0;		//m_tree.GetFirstRootNode()->GetMircoStart();
 			m_endTime = m_tree.GetLastRootNode()->GetMircoEnd();
 			m_constEndTime = m_tree.GetLastRootNode()->GetMircoEnd();
@@ -112,36 +116,38 @@ void ProfileApp::OnUpdate()
 
 		ImGui::SetCursorPosX((float)nPosition * WINDOW_X_SIZE);
 		ImGui::SetCursorPosY(25);
-		if (ImGui::Button(ss.str().c_str(), ImVec2(nSize, 25))) { m_endTime = sPos; }
+		if (ImGui::Button(ss.str().c_str(), ImVec2((float)nSize, 25))) { m_endTime = (long long)sPos; }
 	}
 
-	ImGui::SetNextWindowContentWidth(contentWidth);
-	ImGui::SetNextWindowPos(ImVec2(0, 50));
-	ImGui::BeginChild("BarGraph", ImVec2(WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.2f), true, ImGuiWindowFlags_HorizontalScrollbar);
+	m_timeline.Update();
 
-	int maxNumberOfButtons = m_tree.m_rootNodes.size();
-
-	const int rowHeight = 25;
-
-	ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
-	for (int i = 0; i < maxNumberOfButtons; i++)
-	{
-		DrawProfileResult(m_tree.m_rootNodes[i]);
-	}
-	ImGui::PopStyleVar();
-
-	ImGui::EndChild();
-
+	//ImGui::SetNextWindowContentWidth(contentWidth);
+	//ImGui::SetNextWindowPos(ImVec2(0, 50));
+	//ImGui::BeginChild("BarGraph", ImVec2(WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.2f), true, ImGuiWindowFlags_HorizontalScrollbar);
+	//
+	//int maxNumberOfButtons = (int)m_tree.m_rootNodes.size();
+	//
+	//const int rowHeight = 25;
+	//
+	//ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
+	//for (int i = 0; i < maxNumberOfButtons; i++)
+	//{
+	//	DrawProfileResult(m_tree.m_rootNodes[i]);
+	//}
+	//ImGui::PopStyleVar();
+	//
+	//ImGui::EndChild();
+		
 	ImGui::SetNextWindowPos(ImVec2(0, 0.5f * WINDOW_Y_SIZE));
 	ImGui::BeginChild("StackTrace", ImVec2(WINDOW_X_SIZE, 0.5f * WINDOW_Y_SIZE), true);
-
+	
 	ImGui::EndChild();
 
 	ImGui::End();
 
 	if (GetKeyDown(GLFW_KEY_E))
 	{
-		m_endTime = 50.0f;
+		m_endTime = (long long)50.0f;
 	}
 
 	if (GetKeyDown(GLFW_KEY_S))
@@ -165,7 +171,7 @@ void ProfileApp::OnEvent(Events::Event& event)
 {
 	Events::EventDispatcher dispatcher(event);
 
-	dispatcher.Dispatch<Events::WindowScrollEvent>(BIND_EVENT_FUNC(ProfileApp::EventScroll));
+	dispatcher.Dispatch<Events::WindowScrollEvent>(BIND_EVENT_FUNC(Core::UI::UITimeline::EventScroll, m_timeline));
 }
 
 bool ProfileApp::Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size)
@@ -213,8 +219,8 @@ void ProfileApp::DrawProfileResult(const  Core::TreeNode* node)
 	ss << " ms" << node->ProfileResult.End - node->ProfileResult.Start;
 
 	ImGui::SetCursorPosX((float)nPosition * WINDOW_X_SIZE);
-	ImGui::SetCursorPosY((node->y + 1) * 25);
-	if (ImGui::Button(ss.str().c_str(), ImVec2(nSize * WINDOW_X_SIZE, 25)))
+	ImGui::SetCursorPosY((node->y + 1) * 25.0f);
+	if (ImGui::Button(ss.str().c_str(), ImVec2((float)nSize * WINDOW_X_SIZE, 25.0f)))
 	{
 		std::stringstream ss;
 	
@@ -231,7 +237,7 @@ void ProfileApp::DrawProfileResult(const  Core::TreeNode* node)
 
 bool ProfileApp::EventScroll(Events::WindowScrollEvent& event)
 {
-	m_endTime += event.m_yOffset * 250;
+	m_endTime += (long long)(event.m_yOffset * 250);
 
 	if (m_endTime < 1)
 	{
@@ -243,7 +249,7 @@ bool ProfileApp::EventScroll(Events::WindowScrollEvent& event)
 		m_endTime = m_constEndTime;
 	}
 
-	contentWidth = ((double)m_constEndTime / (double)m_endTime) * WINDOW_X_SIZE;
+	contentWidth = (float)((double)m_constEndTime / (double)m_endTime) * WINDOW_X_SIZE;
 
 	return false;
 }
