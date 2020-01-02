@@ -51,12 +51,31 @@ namespace Events
 		EVENT_CLASS_TYPE(MouseScrolled)
 			EVENT_CLASS_CATEGORY(EventCategoryMouse)
 
-			std::string ToString() const override
+		std::string ToString() const override
 		{
 			std::stringstream ss;
 			ss << "Window Scroll Event: " << m_xOffset << ", " << m_yOffset << "\n";
 			return ss.str();
 		}
 		double m_xOffset, m_yOffset;
+	};
+
+	class AppProfileResultSelectedEvent : public Event
+	{
+	public:
+		AppProfileResultSelectedEvent(void* a_treeNode)
+			: m_treeNode(a_treeNode)
+		{}
+
+		EVENT_CLASS_TYPE(MouseButtonPressed)
+		EVENT_CLASS_CATEGORY(EventCategoryInput)
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "App Profile Result Selected Event" << "\n";
+			return ss.str();
+		}
+		void* m_treeNode;
 	};
 }

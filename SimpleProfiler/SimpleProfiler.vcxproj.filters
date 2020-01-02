@@ -84,6 +84,9 @@
     <ClCompile Include="..\src\Core\UI\UITimeline.cpp">
       <Filter>Source Files\Core\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Core\UI\UIStackTrace.cpp">
+      <Filter>Source Files\Core\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\ProfileApp.h">
@@ -138,6 +141,12 @@
       <Filter>Header Files\Core\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\Core\UI\UIPanel.h">
+      <Filter>Header Files\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Core\UI\UIStackTrace.h">
+      <Filter>Header Files\Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\Core\UI\UIIncludes.h">
       <Filter>Header Files\Core\UI</Filter>
     </ClInclude>
   </ItemGroup>

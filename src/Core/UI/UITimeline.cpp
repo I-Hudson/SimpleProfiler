@@ -1,5 +1,6 @@
 #include "Core/UI/UITimeline.h"
 
+#include "ProfileApp.h"
 #include <iostream>
 
 namespace Core
@@ -14,7 +15,7 @@ namespace Core
 
 		UITimeline::UITimeline(UIPanel* parent, const char* panelName, const ImVec2& position, const ImVec2& size)
 			: UIPanel(parent, panelName, position, size),
-				m_timelineStart(0.0f), m_timelineCurrent(0.0f), m_timelineEnd(0.0f), m_tree(nullptr), m_timelineAbsEnd(0.0f), m_contentWidth(size.x)
+				m_timelineStart(0), m_timelineCurrent(0), m_timelineEnd(0), m_tree(nullptr), m_timelineAbsEnd(0), m_contentWidth(size.x)
 		{
 		}
 
@@ -35,9 +36,13 @@ namespace Core
 
 		void UITimeline::Update()
 		{
+			DrawTimelineHeader();
+
 			ImGui::SetNextWindowContentWidth(m_contentWidth);
 			PreProcessUpdate();
 			ImGui::BeginChild(m_panelName.c_str(), m_size, true, ImGuiWindowFlags_HorizontalScrollbar);
+
+			std::cout << "Scroll X: " << ImGui::GetScrollX() << "\n";
 
 			const int rowHeight = 25;
 
@@ -53,22 +58,48 @@ namespace Core
 
 		bool UITimeline::EventScroll(Events::WindowScrollEvent& event)
 		{
-			m_timelineEnd += event.m_yOffset * 250;
+			m_timelineEnd += (long long)(event.m_yOffset * (m_timelineEnd * 0.5f));
 
-			//if (m_timelineEnd < 1)
-			//{
-			//	m_timelineEnd = 0;
-			//}
-			//else if (m_timelineEnd > m_timelineAbsEnd)
-			//{
-			//	m_timelineEnd = m_timelineAbsEnd;
-			//}
+			if (m_timelineEnd < 1)
+			{
+				m_timelineEnd = 1;
+			}
+			else if (m_timelineEnd > m_timelineAbsEnd)
+			{
+				m_timelineEnd = m_timelineAbsEnd;
+			}
 
 			m_contentWidth = (m_timelineAbsEnd / m_timelineEnd) * m_size.x;
 
-			std::cout << m_timelineEnd << "\n";
-
 			return false;
+		}
+
+		void UITimeline::DrawTimelineHeader()
+		{
+			for (size_t i = 0; i < 10; i++)
+			{
+
+				double sPos = (m_timelineEnd / 10.0) * (double)i;
+				double nPosition = sPos / m_timelineEnd;
+				double nSize = m_size.x / 20;
+
+				std::stringstream ss;
+
+				double displayTime = sPos / 1000.0;
+				ss << "ms:";
+				if (displayTime > 1.0)
+				{
+					ss << (uint32_t)displayTime;
+				}
+				else
+				{
+					ss << displayTime;
+				}
+
+				ImGui::SetCursorPosX((float)nPosition * m_size.x);
+				ImGui::SetCursorPosY(25);
+				if (ImGui::Button(ss.str().c_str(), ImVec2((float)nSize, 25))) { m_timelineEnd = (long long)sPos; }
+			}
 		}
 
 		void UITimeline::DrawProfileElement(TreeNode& node)
@@ -97,6 +128,8 @@ namespace Core
 			if (ImGui::Button(ss.str().c_str(), ImVec2((float)elementSize * m_size.x, 25.0f)))
 			{
 				//@TODO. Send event, profile result has been clicked.
+				Events::AppProfileResultSelectedEvent event(static_cast<void*>(&node));
+				ProfileApp::FireEvent(event);
 			}
 		}
 	}

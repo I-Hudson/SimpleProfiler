@@ -15,7 +15,7 @@ float WINDOW_Y_SIZE = 1080;
 
 float contentWidth = WINDOW_X_SIZE;
 
-#define BIND_EVENT_FUNC(func, object) (std::bind(&func, object, std::placeholders::_1))
+#define BIND_EVENT_FUNC(func, object) (std::bind(&func, &object, std::placeholders::_1))
 
 ProfileApp::ProfileApp()
 {
@@ -45,6 +45,7 @@ void ProfileApp::OnCreate()
 		});
 
 	m_timeline = Core::UI::UITimeline(nullptr, "Timeline", 0, 50, WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.35f);
+	m_stackTrace = Core::UI::UIStackTrace(nullptr, "StackTrace", 0, WINDOW_Y_SIZE * 0.4f, WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.4f);
 
 	Profile::ProfilerDataProcessor data;
 	data.Load("mill.json");
@@ -94,54 +95,8 @@ void ProfileApp::OnUpdate()
 
 	//Splitter(true, 8.0f, &WINDOW_X_SIZE, &WINDOW_X_SIZE, 8, 8, WINDOW_Y_SIZE * 0.25f);
 
-	for (size_t i = 0; i < 10; i++)
-	{
-
-		double sPos = ((double)m_endTime / 10.0) * (double)i;
-		double nPosition = sPos / (double)m_endTime;
-		double nSize = WINDOW_X_SIZE / 20;
-
-		std::stringstream ss;
-
-		double displayTime = sPos / 1000.0;
-		ss << "ms:";
-		if (displayTime > 1.0)
-		{
-			ss << (uint32_t)displayTime;
-		}
-		else
-		{
-			ss << displayTime;
-		}
-
-		ImGui::SetCursorPosX((float)nPosition * WINDOW_X_SIZE);
-		ImGui::SetCursorPosY(25);
-		if (ImGui::Button(ss.str().c_str(), ImVec2((float)nSize, 25))) { m_endTime = (long long)sPos; }
-	}
-
 	m_timeline.Update();
-
-	//ImGui::SetNextWindowContentWidth(contentWidth);
-	//ImGui::SetNextWindowPos(ImVec2(0, 50));
-	//ImGui::BeginChild("BarGraph", ImVec2(WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.2f), true, ImGuiWindowFlags_HorizontalScrollbar);
-	//
-	//int maxNumberOfButtons = (int)m_tree.m_rootNodes.size();
-	//
-	//const int rowHeight = 25;
-	//
-	//ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
-	//for (int i = 0; i < maxNumberOfButtons; i++)
-	//{
-	//	DrawProfileResult(m_tree.m_rootNodes[i]);
-	//}
-	//ImGui::PopStyleVar();
-	//
-	//ImGui::EndChild();
-		
-	ImGui::SetNextWindowPos(ImVec2(0, 0.5f * WINDOW_Y_SIZE));
-	ImGui::BeginChild("StackTrace", ImVec2(WINDOW_X_SIZE, 0.5f * WINDOW_Y_SIZE), true);
-	
-	ImGui::EndChild();
+	m_stackTrace.Update();
 
 	ImGui::End();
 
@@ -172,6 +127,7 @@ void ProfileApp::OnEvent(Events::Event& event)
 	Events::EventDispatcher dispatcher(event);
 
 	dispatcher.Dispatch<Events::WindowScrollEvent>(BIND_EVENT_FUNC(Core::UI::UITimeline::EventScroll, m_timeline));
+	dispatcher.Dispatch<Events::AppProfileResultSelectedEvent>(BIND_EVENT_FUNC(Core::UI::UIStackTrace::EventProfileResultSelected, m_stackTrace));
 }
 
 bool ProfileApp::Splitter(bool split_vertically, float thickness, float* size1, float* size2, float min_size1, float min_size2, float splitter_long_axis_size)

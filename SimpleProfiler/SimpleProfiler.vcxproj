@@ -76,6 +76,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin/$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin/$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -147,6 +150,7 @@
     <ClCompile Include="..\src\Core\Application.cpp" />
     <ClCompile Include="..\src\Core\Tree.cpp" />
     <ClCompile Include="..\src\Core\UI\UIPanel.cpp" />
+    <ClCompile Include="..\src\Core\UI\UIStackTrace.cpp" />
     <ClCompile Include="..\src\Core\UI\UITimeline.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\ProfileApp.cpp" />
@@ -165,7 +169,9 @@
     <ClInclude Include="..\inc\Core\Application.h" />
     <ClInclude Include="..\inc\Core\ErrorCodes.h" />
     <ClInclude Include="..\inc\Core\Tree.h" />
+    <ClInclude Include="..\inc\Core\UI\UIIncludes.h" />
     <ClInclude Include="..\inc\Core\UI\UIPanel.h" />
+    <ClInclude Include="..\inc\Core\UI\UIStackTrace.h" />
     <ClInclude Include="..\inc\Core\UI\UITimeline.h" />
     <ClInclude Include="..\inc\Events\ApplicationEvent.h" />
     <ClInclude Include="..\inc\Events\Event.h" />

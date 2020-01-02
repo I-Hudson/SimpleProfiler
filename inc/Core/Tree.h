@@ -13,6 +13,15 @@ namespace Core
 
 		int x, y;
 
+		std::string GetStringFull()
+		{
+			std::stringstream ss;
+			ss << ProfileResult.Name;
+			ss << " ms:" << ProfileResult.End - ProfileResult.Start;
+
+			return ss.str();
+		}
+
 		void AddChild(TreeNode* node)
 		{
 			Children.push_back(node);

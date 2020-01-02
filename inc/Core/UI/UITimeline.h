@@ -23,12 +23,14 @@ namespace Core
 			bool EventScroll(Events::WindowScrollEvent& event);
 
 		private:
+			void DrawTimelineHeader();
+
 			void DrawProfileElement(TreeNode& node);
 
 		private:
-			float m_timelineStart;
-			float m_timelineCurrent;
-			float m_timelineEnd;
+			long long m_timelineStart;
+			long long m_timelineCurrent;
+			long long m_timelineEnd;
 
 			Tree* m_tree;
 

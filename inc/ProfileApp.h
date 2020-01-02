@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Application.h"
 #include "Core/Tree.h"
-#include "Core/UI/UITimeline.h"
+#include "Core/UI/UIIncludes.h"
 
 #include "imgui_internal.h"
 
@@ -28,6 +28,7 @@ private:
 	bool EventScroll(Events::WindowScrollEvent& event);
 
 	Core::UI::UITimeline m_timeline;
+	Core::UI::UIStackTrace m_stackTrace;
 
 	long long m_startTime;
 	long long m_endTime;
