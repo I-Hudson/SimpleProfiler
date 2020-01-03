@@ -6,7 +6,8 @@ Simple profile is a small tool to be used to profile any C++ application. Simple
 This app will display a timeline. The timeline is an overview of the application which has been profiled. This view will show any function profiled, and it's corresponding time taken.
 ![](https://raw.githubusercontent.com/I-Hudson/SimpleProfiler/master/images/SimpleTimelline.png)
 # Stack trace
-
+This app will display a stack trace below the timeline. This trace is populated when a result on the timeline has been selected.
+![](https://raw.githubusercontent.com/I-Hudson/SimpleProfiler/master/images/SimpleStackTrace.PNG)
 # 3rd Party
 
 This project includes:
