@@ -29,6 +29,16 @@ namespace Core
 			m_show = false;
 		}
 
+		bool UIPanel::PositionWithinPanel(ImVec2 position)
+		{
+			if (position.x >= m_position.x && position.x <= m_position.x + m_size.x &&
+				position.y >= m_position.y && position.y <= m_position.y + m_size.y)
+			{
+				return true;
+			}
+			return false;
+		}
+
 		void UIPanel::PreProcessUpdate()
 		{
 			ImGui::SetNextWindowPos(m_position);

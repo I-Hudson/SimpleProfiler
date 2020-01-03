@@ -48,7 +48,7 @@ void ProfileApp::OnCreate()
 	m_stackTrace = Core::UI::UIStackTrace(nullptr, "StackTrace", 0, WINDOW_Y_SIZE * 0.4f, WINDOW_X_SIZE, WINDOW_Y_SIZE * 0.4f);
 
 	Profile::ProfilerDataProcessor data;
-	data.Load("mill.json");
+	data.Load("small.json");
 
 	if (data.DataReady())
 	{
@@ -127,6 +127,8 @@ void ProfileApp::OnEvent(Events::Event& event)
 	Events::EventDispatcher dispatcher(event);
 
 	dispatcher.Dispatch<Events::WindowScrollEvent>(BIND_EVENT_FUNC(Core::UI::UITimeline::EventScroll, m_timeline));
+
+	dispatcher.Dispatch<Events::WindowScrollEvent>(BIND_EVENT_FUNC(Core::UI::UIStackTrace::EventScroll, m_stackTrace));
 	dispatcher.Dispatch<Events::AppProfileResultSelectedEvent>(BIND_EVENT_FUNC(Core::UI::UIStackTrace::EventProfileResultSelected, m_stackTrace));
 }
 

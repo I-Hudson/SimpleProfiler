@@ -42,8 +42,6 @@ namespace Core
 			PreProcessUpdate();
 			ImGui::BeginChild(m_panelName.c_str(), m_size, true, ImGuiWindowFlags_HorizontalScrollbar);
 
-			std::cout << "Scroll X: " << ImGui::GetScrollX() << "\n";
-
 			const int rowHeight = 25;
 
 			ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
@@ -58,6 +56,11 @@ namespace Core
 
 		bool UITimeline::EventScroll(Events::WindowScrollEvent& event)
 		{
+			if (!PositionWithinPanel(ImGui::GetMousePos()))
+			{
+				return false;
+			}
+
 			m_timelineEnd += (long long)(event.m_yOffset * (m_timelineEnd * 0.5f));
 
 			if (m_timelineEnd < 1)

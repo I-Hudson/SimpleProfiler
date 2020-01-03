@@ -19,9 +19,20 @@ namespace Core
 			virtual void Update() override;
 
 			bool EventProfileResultSelected(Events::AppProfileResultSelectedEvent& event);
+			bool EventScroll(Events::WindowScrollEvent& event);
+
+		private:
+			void DrawTreeNode(TreeNode* node);
+
+			ImVec2 NonClipedWindowSize();
 
 		private:
 			TreeNode* m_displayedTrackNode;
+
+			int m_itemsDrawn;
+			float m_scrollY;
+			float m_windowSizeY;
+			float m_scrollYBuffer = 90.0f;
 		};
 	}
 }

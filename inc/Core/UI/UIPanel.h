@@ -20,6 +20,8 @@ namespace Core
 
 			void SetShowState(const bool& newState);
 
+			bool PositionWithinPanel(ImVec2 position);
+
 			virtual void Update() = 0;
 
 		protected:

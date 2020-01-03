@@ -132,7 +132,7 @@ namespace Core
 		ImGui_ImplGlfw_InitForOpenGL(m_window, true);
 		ImGui_ImplOpenGL3_Init("#version 400");
 
-		ImGui::StyleColorsDark();
+		ImGui::StyleColorsClassic();
 	}
 
 	void Application::ImGUIDestroy()
